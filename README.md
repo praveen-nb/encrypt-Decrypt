@@ -43,6 +43,20 @@ def decrypt_file(file_path):
         print(f"File {file_path} decrypted successfully.")
     else:
         print("Encryption key not found. Please generate a key first.")
+        
+def encrypt_file(file_path):
+    key = load_key()
+    if key:
+        cipher_suite = Fernet(key)
+        with open(file_path, 'rb') as file:
+            file_data = file.read()
+            encrypted_data = cipher_suite.encrypt(file_data)
+        with open(file_path, 'wb') as encrypted_file:
+            encrypted_file.write(encrypted_data)
+        print(f"File {file_path} encrypted successfully.")
+    else:
+        print("Encryption key not found. Please generate a key first.")
+
 
 # Example usage
 generate_key()
